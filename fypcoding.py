@@ -9,6 +9,23 @@ import re
 import base64
 import datetime as dt
 
+# Function to load and encode an image
+def get_base64_image(image_path):
+    with open(image_path, "rb") as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+# Load your images
+logo_base64 = get_base64_image("assets/logo_v3.png")
+profile_base64 = get_base64_image("assets/profilepic.jpg")
+
+# Display them in Streamlit using HTML
+st.markdown(f"""
+    <div style="display:flex;align-items:center;gap:20px;">
+        <img src="data:image/png;base64,{logo_base64}" width="120">
+        <img src="data:image/jpeg;base64,{profile_base64}" width="120" style="border-radius:50%;">
+    </div>
+""", unsafe_allow_html=True)
 
 # Set page config to wide
 st.set_page_config(layout="wide")
